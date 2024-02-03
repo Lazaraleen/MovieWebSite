@@ -14,7 +14,7 @@
 }
 
 .banner .content h4 span:last-child {
-    padding-right: 0;
+    border-right: none;
 }
 
 .banner .content h4 span i {
