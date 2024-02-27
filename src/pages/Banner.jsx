@@ -18,25 +18,36 @@ function Banner() {
     useEffect(() => {
         fetchData();
     }, []);
+    const handleSlideChange = id => {
+        console.log(id);
+    }
 
     return (
         <div className="banner">
-            <div className="movie">
-                <img src={bgImg} alt="Background" className="bgImg active" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-12">
-                            <MovieContent />
-                        </div>
-                        <div className="col-lg-6 col-md-12">
-                            <MovieDate />
-                            <PlayBtn />
+            {
+                movies && movies.length>0 && movies.map(movie=>(
+                    <div className="movie">
+                        <img 
+                            src={movie.bgImg} 
+                            alt="Background" 
+                            className={`bgImg ${movie.active ? 'active' : undefined}`} 
+                        />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-lg-6 col-md-12">
+                                    <MovieContent movie={movie}/>
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+                                    <MovieDate movie={movie}/>
+                                    <PlayBtn movie={movie}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                ))
+            }
             {
-                movies && movies.length>0 && <MovieSwiper slides={movies} />
+                movies && movies.length>0 && <MovieSwiper slides={movies} slideChange={handleSlideChange} />
             }
             <MovieSwiper />
         </div>
